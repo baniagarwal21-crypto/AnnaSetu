@@ -1,0 +1,366 @@
+date,day,holiday,consecutive_holiday_days,mess_status,breakfast,lunch,dinner
+2025-07-01,Tuesday,,77,Closed,0,0,0
+2025-07-02,Wednesday,,77,Closed,0,0,0
+2025-07-03,Thursday,,77,Closed,0,0,0
+2025-07-04,Friday,,77,Closed,0,0,0
+2025-07-05,Saturday,First Saturday,77,Closed,0,0,0
+2025-07-06,Sunday,Sunday (Weekly Holiday),77,Closed,0,0,0
+2025-07-07,Monday,,77,Closed,0,0,0
+2025-07-08,Tuesday,,77,Closed,0,0,0
+2025-07-09,Wednesday,,77,Closed,0,0,0
+2025-07-10,Thursday,,77,Closed,0,0,0
+2025-07-11,Friday,,77,Closed,0,0,0
+2025-07-12,Saturday,,77,Closed,0,0,0
+2025-07-13,Sunday,Sunday (Weekly Holiday),77,Closed,0,0,0
+2025-07-14,Monday,,77,Closed,0,0,0
+2025-07-15,Tuesday,,77,Closed,0,0,0
+2025-07-16,Wednesday,,77,Closed,0,0,0
+2025-07-17,Thursday,,77,Closed,0,0,0
+2025-07-18,Friday,,77,Closed,0,0,0
+2025-07-19,Saturday,Third Saturday,77,Closed,0,0,0
+2025-07-20,Sunday,Sunday (Weekly Holiday),77,Closed,0,0,0
+2025-07-21,Monday,,77,Closed,0,0,0
+2025-07-22,Tuesday,,77,Closed,0,0,0
+2025-07-23,Wednesday,,77,Closed,0,0,0
+2025-07-24,Thursday,,77,Closed,0,0,0
+2025-07-25,Friday,,77,Closed,0,0,0
+2025-07-26,Saturday,,77,Closed,0,0,0
+2025-07-27,Sunday,Sunday (Weekly Holiday),77,Closed,0,0,0
+2025-07-28,Monday,,77,Closed,0,0,0
+2025-07-29,Tuesday,,77,Closed,0,0,0
+2025-07-30,Wednesday,,77,Closed,0,0,0
+2025-07-31,Thursday,,77,Closed,0,0,0
+2025-08-01,Friday,,77,Closed,0,0,0
+2025-08-02,Saturday,First Saturday,77,Closed,0,0,0
+2025-08-03,Sunday,Sunday (Weekly Holiday),77,Closed,0,0,0
+2025-08-04,Monday,,77,Closed,0,0,0
+2025-08-05,Tuesday,,77,Closed,0,0,0
+2025-08-06,Wednesday,,77,Closed,0,0,0
+2025-08-07,Thursday,,77,Closed,0,0,0
+2025-08-08,Friday,,77,Closed,0,0,0
+2025-08-09,Saturday,Raksha Bandhan,77,Closed,0,0,0
+2025-08-10,Sunday,Sunday (Weekly Holiday),77,Closed,0,0,0
+2025-08-11,Monday,,77,Closed,0,0,0
+2025-08-12,Tuesday,,77,Closed,0,0,0
+2025-08-13,Wednesday,,77,Closed,0,0,0
+2025-08-14,Thursday,,77,Closed,0,0,0
+2025-08-15,Friday,Independence Day,77,Closed,0,0,0
+2025-08-16,Saturday,Janmashtami / Third Saturday,77,Closed,0,0,0
+2025-08-17,Sunday,Sunday (Weekly Holiday),77,Closed,0,0,0
+2025-08-18,Monday,,77,Closed,0,0,0
+2025-08-19,Tuesday,,77,Closed,0,0,0
+2025-08-20,Wednesday,,77,Closed,0,0,0
+2025-08-21,Thursday,,0,Open,325,545,491
+2025-08-22,Friday,,0,Open,324,521,496
+2025-08-23,Saturday,,0,Open,237,392,358
+2025-08-24,Sunday,Sunday (Weekly Holiday),1,Open,204,270,242
+2025-08-25,Monday,,0,Open,321,521,543
+2025-08-26,Tuesday,,0,Open,321,524,494
+2025-08-27,Wednesday,,0,Open,323,528,481
+2025-08-28,Thursday,,0,Open,323,553,506
+2025-08-29,Friday,,0,Open,322,529,492
+2025-08-30,Saturday,,0,Open,252,400,354
+2025-08-31,Sunday,Sunday (Weekly Holiday),1,Open,202,278,257
+2025-09-01,Monday,,0,Open,319,529,539
+2025-09-02,Tuesday,,0,Open,319,532,490
+2025-09-03,Wednesday,,0,Open,321,536,496
+2025-09-04,Thursday,,0,Open,338,538,502
+2025-09-05,Friday,Eid-e-Milad (calendar listing; date may vary),3,Open,230,386,351
+2025-09-06,Saturday,First Saturday,3,Open,180,277,266
+2025-09-07,Sunday,Sunday (Weekly Holiday),3,Open,160,229,202
+2025-09-08,Monday,,0,Open,317,514,534
+2025-09-09,Tuesday,,0,Open,317,540,486
+2025-09-10,Wednesday,,0,Open,319,521,492
+2025-09-11,Thursday,,0,Open,336,546,498
+2025-09-12,Friday,,0,Open,318,522,484
+2025-09-13,Saturday,,0,Open,248,393,365
+2025-09-14,Sunday,Sunday (Weekly Holiday),1,Open,198,271,249
+2025-09-15,Monday,,0,Open,315,522,530
+2025-09-16,Tuesday,,0,Open,332,525,501
+2025-09-17,Wednesday,,0,Open,317,529,488
+2025-09-18,Thursday,,0,Open,334,531,494
+2025-09-19,Friday,,0,Open,316,530,499
+2025-09-20,Saturday,Third Saturday,2,Open,221,361,325
+2025-09-21,Sunday,Sunday (Weekly Holiday),2,Open,192,251,220
+2025-09-22,Monday,,0,Open,313,530,547
+2025-09-23,Tuesday,,0,Open,330,533,497
+2025-09-24,Wednesday,,0,Open,315,537,484
+2025-09-25,Thursday,,0,Open,332,539,509
+2025-09-26,Friday,,0,Open,314,538,495
+2025-09-27,Saturday,,0,Open,244,386,357
+2025-09-28,Sunday,Sunday (Weekly Holiday),1,Open,211,287,241
+2025-09-29,Monday,,0,Open,311,515,542
+2025-09-30,Tuesday,,0,Open,328,541,493
+2025-10-01,Wednesday,Maha Navami,2,Open,254,423,389
+2025-10-02,Thursday,Gandhi Jayanti / Dussehra,2,Open,267,443,409
+2025-10-03,Friday,,0,Open,329,523,491
+2025-10-04,Saturday,First Saturday,2,Open,218,355,318
+2025-10-05,Sunday,Sunday (Weekly Holiday),2,Open,188,245,230
+2025-10-06,Monday,,0,Open,309,523,538
+2025-10-07,Tuesday,,0,Open,326,526,489
+2025-10-08,Wednesday,,0,Open,328,530,495
+2025-10-09,Thursday,,0,Open,328,532,501
+2025-10-10,Friday,,0,Open,327,531,487
+2025-10-11,Saturday,,0,Open,240,379,368
+2025-10-12,Sunday,Sunday (Weekly Holiday),1,Open,207,280,252
+2025-10-13,Monday,,0,Open,307,531,533
+2025-10-14,Tuesday,,0,Open,324,534,504
+2025-10-15,Wednesday,,0,Open,326,538,491
+2025-10-16,Thursday,,0,Open,326,540,497
+2025-10-17,Friday,,0,Open,325,539,483
+2025-10-18,Saturday,Third Saturday,6,Open,71,116,109
+2025-10-19,Sunday,Deepawali Break / Sunday (Weekly Holiday),6,Open,61,86,74
+2025-10-20,Monday,Deepawali Break,6,Open,96,155,158
+2025-10-21,Tuesday,Deepawali Break,6,Open,96,162,150
+2025-10-22,Wednesday,Deepawali Break,6,Open,97,157,146
+2025-10-23,Thursday,Deepawali Break,6,Open,97,164,148
+2025-10-24,Friday,,0,Open,323,524,498
+2025-10-25,Saturday,,0,Open,253,395,360
+2025-10-26,Sunday,Sunday (Weekly Holiday),1,Open,203,273,244
+2025-10-27,Monday,,0,Open,320,524,545
+2025-10-28,Tuesday,,0,Open,320,527,496
+2025-10-29,Wednesday,,0,Open,322,531,483
+2025-10-30,Thursday,,0,Open,322,533,508
+2025-10-31,Friday,,0,Open,321,532,494
+2025-11-01,Saturday,First Saturday,2,Open,226,342,320
+2025-11-02,Sunday,Sunday (Weekly Holiday),2,Open,181,253,233
+2025-11-03,Monday,,0,Open,318,509,541
+2025-11-04,Tuesday,,0,Open,318,535,492
+2025-11-05,Wednesday,Guru Nanak Jayanti / Ganga Snan,1,Open,320,539,479
+2025-11-06,Thursday,,0,Open,337,541,504
+2025-11-07,Friday,,0,Open,319,540,490
+2025-11-08,Saturday,,0,Open,249,388,352
+2025-11-09,Sunday,Sunday (Weekly Holiday),1,Open,199,289,255
+2025-11-10,Monday,,0,Open,316,517,536
+2025-11-11,Tuesday,,0,Open,333,543,488
+2025-11-12,Wednesday,,0,Open,318,524,494
+2025-11-13,Thursday,,0,Open,335,549,500
+2025-11-14,Friday,,0,Open,317,525,486
+2025-11-15,Saturday,Third Saturday,2,Open,222,356,330
+2025-11-16,Sunday,Sunday (Weekly Holiday),2,Open,177,247,226
+2025-11-17,Monday,,0,Open,314,525,532
+2025-11-18,Tuesday,,0,Open,331,528,503
+2025-11-19,Wednesday,,0,Open,316,532,490
+2025-11-20,Thursday,,0,Open,333,534,496
+2025-11-21,Friday,,0,Open,315,533,501
+2025-11-22,Saturday,,0,Open,245,381,363
+2025-11-23,Sunday,Sunday (Weekly Holiday),1,Open,212,282,247
+2025-11-24,Monday,,0,Open,312,510,528
+2025-11-25,Tuesday,,0,Open,329,536,499
+2025-11-26,Wednesday,,0,Open,314,517,486
+2025-11-27,Thursday,,0,Open,331,542,492
+2025-11-28,Friday,,0,Open,330,541,497
+2025-11-29,Saturday,,0,Open,243,389,359
+2025-11-30,Sunday,Sunday (Weekly Holiday),1,Open,210,290,243
+2025-12-01,Monday,,0,Open,310,518,544
+2025-12-02,Tuesday,,0,Open,327,544,495
+2025-12-03,Wednesday,,0,Open,312,525,482
+2025-12-04,Thursday,,0,Open,329,550,507
+2025-12-05,Friday,,0,Open,328,526,493
+2025-12-06,Saturday,First Saturday,2,Open,217,357,320
+2025-12-07,Sunday,Sunday (Weekly Holiday),2,Open,187,248,232
+2025-12-08,Monday,,45,Closed,0,0,0
+2025-12-09,Tuesday,,45,Closed,0,0,0
+2025-12-10,Wednesday,,45,Closed,0,0,0
+2025-12-11,Thursday,,45,Closed,0,0,0
+2025-12-12,Friday,,45,Closed,0,0,0
+2025-12-13,Saturday,,45,Closed,0,0,0
+2025-12-14,Sunday,Sunday (Weekly Holiday),45,Closed,0,0,0
+2025-12-15,Monday,,45,Closed,0,0,0
+2025-12-16,Tuesday,,45,Closed,0,0,0
+2025-12-17,Wednesday,,45,Closed,0,0,0
+2025-12-18,Thursday,,45,Closed,0,0,0
+2025-12-19,Friday,,45,Closed,0,0,0
+2025-12-20,Saturday,Third Saturday,45,Closed,0,0,0
+2025-12-21,Sunday,Sunday (Weekly Holiday),45,Closed,0,0,0
+2025-12-22,Monday,,45,Closed,0,0,0
+2025-12-23,Tuesday,,45,Closed,0,0,0
+2025-12-24,Wednesday,,45,Closed,0,0,0
+2025-12-25,Thursday,Christmas Day,45,Closed,0,0,0
+2025-12-26,Friday,,45,Closed,0,0,0
+2025-12-27,Saturday,,45,Closed,0,0,0
+2025-12-28,Sunday,Sunday (Weekly Holiday),45,Closed,0,0,0
+2025-12-29,Monday,,45,Closed,0,0,0
+2025-12-30,Tuesday,,45,Closed,0,0,0
+2025-12-31,Wednesday,,45,Closed,0,0,0
+2026-01-01,Thursday,,45,Closed,0,0,0
+2026-01-02,Friday,,45,Closed,0,0,0
+2026-01-03,Saturday,First Saturday,45,Closed,0,0,0
+2026-01-04,Sunday,Sunday (Weekly Holiday),45,Closed,0,0,0
+2026-01-05,Monday,,45,Closed,0,0,0
+2026-01-06,Tuesday,,45,Closed,0,0,0
+2026-01-07,Wednesday,,45,Closed,0,0,0
+2026-01-08,Thursday,,45,Closed,0,0,0
+2026-01-09,Friday,,45,Closed,0,0,0
+2026-01-10,Saturday,,45,Closed,0,0,0
+2026-01-11,Sunday,Sunday (Weekly Holiday),45,Closed,0,0,0
+2026-01-12,Monday,,45,Closed,0,0,0
+2026-01-13,Tuesday,,45,Closed,0,0,0
+2026-01-14,Wednesday,,45,Closed,0,0,0
+2026-01-15,Thursday,,45,Closed,0,0,0
+2026-01-16,Friday,,45,Closed,0,0,0
+2026-01-17,Saturday,Third Saturday,45,Closed,0,0,0
+2026-01-18,Sunday,Sunday (Weekly Holiday),45,Closed,0,0,0
+2026-01-19,Monday,,45,Closed,0,0,0
+2026-01-20,Tuesday,,45,Closed,0,0,0
+2026-01-21,Wednesday,,45,Closed,0,0,0
+2026-01-22,Thursday,,0,Open,332,537,498
+2026-01-23,Friday,,0,Open,314,536,484
+2026-01-24,Saturday,,0,Open,244,384,365
+2026-01-25,Sunday,Sunday (Weekly Holiday),2,Open,190,256,224
+2026-01-26,Monday,Republic Day,2,Open,280,462,477
+2026-01-27,Tuesday,,0,Open,328,539,501
+2026-01-28,Wednesday,,0,Open,313,520,488
+2026-01-29,Thursday,,0,Open,330,545,494
+2026-01-30,Friday,,0,Open,329,521,499
+2026-01-31,Saturday,,0,Open,242,392,361
+2026-02-01,Sunday,Sunday (Weekly Holiday),1,Open,209,270,245
+2026-02-02,Monday,,0,Open,309,521,547
+2026-02-03,Tuesday,,0,Open,326,524,497
+2026-02-04,Wednesday,,0,Open,328,528,484
+2026-02-05,Thursday,,0,Open,328,553,509
+2026-02-06,Friday,,0,Open,327,529,495
+2026-02-07,Saturday,First Saturday,2,Open,216,360,321
+2026-02-08,Sunday,Sunday (Weekly Holiday),2,Open,186,250,217
+2026-02-09,Monday,,0,Open,307,529,542
+2026-02-10,Tuesday,,0,Open,324,532,493
+2026-02-11,Wednesday,,0,Open,326,536,480
+2026-02-12,Thursday,,0,Open,326,538,505
+2026-02-13,Friday,,0,Open,325,537,491
+2026-02-14,Saturday,,0,Open,238,385,353
+2026-02-15,Sunday,Shivratri / Sunday (Weekly Holiday),1,Open,205,286,256
+2026-02-16,Monday,,0,Open,322,514,538
+2026-02-17,Tuesday,,0,Open,322,540,489
+2026-02-18,Wednesday,,0,Open,324,521,495
+2026-02-19,Thursday,,0,Open,324,546,501
+2026-02-20,Friday,,0,Open,323,522,487
+2026-02-21,Saturday,Third Saturday,2,Open,228,354,331
+2026-02-22,Sunday,Sunday (Weekly Holiday),2,Open,183,244,227
+2026-02-23,Monday,,0,Open,320,522,533
+2026-02-24,Tuesday,,0,Open,320,525,504
+2026-02-25,Wednesday,,0,Open,322,529,491
+2026-02-26,Thursday,,0,Open,322,531,497
+2026-02-27,Friday,,0,Open,321,530,483
+2026-02-28,Saturday,,0,Open,251,401,364
+2026-03-01,Sunday,Sunday (Weekly Holiday),5,Open,121,167,149
+2026-03-02,Monday,Holika Dahan,5,Open,134,223,222
+2026-03-03,Tuesday,Holi Holiday,5,Open,134,224,210
+2026-03-04,Wednesday,Dhulendi (Holi),5,Open,134,226,205
+2026-03-05,Thursday,Dhulendi (Holi),5,Open,142,226,207
+2026-03-06,Friday,,0,Open,319,538,498
+2026-03-07,Saturday,First Saturday,2,Open,224,347,324
+2026-03-08,Sunday,Sunday (Weekly Holiday),2,Open,179,258,220
+2026-03-09,Monday,,0,Open,316,515,545
+2026-03-10,Tuesday,,0,Open,333,541,496
+2026-03-11,Wednesday,,0,Open,318,522,483
+2026-03-12,Thursday,,0,Open,335,547,508
+2026-03-13,Friday,,0,Open,317,523,494
+2026-03-14,Saturday,,0,Open,247,394,356
+2026-03-15,Sunday,Sunday (Weekly Holiday),1,Open,197,272,259
+2026-03-16,Monday,,0,Open,314,523,541
+2026-03-17,Tuesday,,0,Open,331,526,492
+2026-03-18,Wednesday,,0,Open,316,530,479
+2026-03-19,Thursday,,0,Open,333,532,504
+2026-03-20,Friday,,0,Open,315,531,490
+2026-03-21,Saturday,Third Saturday / Eid-ul-Fitr (calendar listing),2,Open,220,341,317
+2026-03-22,Sunday,Sunday (Weekly Holiday),2,Open,191,252,230
+2026-03-23,Monday,,0,Open,312,531,536
+2026-03-24,Tuesday,,0,Open,329,534,488
+2026-03-25,Wednesday,,0,Open,314,538,494
+2026-03-26,Thursday,Ram Navami,1,Open,331,540,500
+2026-03-27,Friday,,0,Open,330,539,486
+2026-03-28,Saturday,,0,Open,243,387,367
+2026-03-29,Sunday,Sunday (Weekly Holiday),1,Open,210,288,251
+2026-03-30,Monday,,0,Open,310,516,532
+2026-03-31,Tuesday,,0,Open,327,542,503
+2026-04-01,Wednesday,,0,Open,312,523,490
+2026-04-02,Thursday,,0,Open,329,548,496
+2026-04-03,Friday,,0,Open,328,524,501
+2026-04-04,Saturday,First Saturday,2,Open,217,356,327
+2026-04-05,Sunday,Sunday (Weekly Holiday),2,Open,187,246,222
+2026-04-06,Monday,,0,Open,308,524,528
+2026-04-07,Tuesday,,0,Open,325,527,499
+2026-04-08,Wednesday,,0,Open,327,531,486
+2026-04-09,Thursday,,0,Open,327,533,492
+2026-04-10,Friday,,0,Open,326,532,497
+2026-04-11,Saturday,,0,Open,239,380,359
+2026-04-12,Sunday,Sunday (Weekly Holiday),1,Open,206,281,243
+2026-04-13,Monday,,0,Open,323,509,544
+2026-04-14,Tuesday,,0,Open,323,535,495
+2026-04-15,Wednesday,,0,Open,325,539,482
+2026-04-16,Thursday,,0,Open,325,541,507
+2026-04-17,Friday,,0,Open,324,540,493
+2026-04-18,Saturday,Third Saturday,2,Open,213,349,320
+2026-04-19,Sunday,Sunday (Weekly Holiday),2,Open,184,260,232
+2026-04-20,Monday,,0,Open,321,517,540
+2026-04-21,Tuesday,,0,Open,321,543,491
+2026-04-22,Wednesday,,0,Open,323,524,497
+2026-04-23,Thursday,,0,Open,323,549,503
+2026-04-24,Friday,,0,Open,322,525,489
+2026-04-25,Saturday,,0,Open,252,396,351
+2026-04-26,Sunday,Sunday (Weekly Holiday),1,Open,202,274,254
+2026-04-27,Monday,,0,Open,319,525,535
+2026-04-28,Tuesday,,0,Open,319,528,487
+2026-04-29,Wednesday,,0,Open,321,532,493
+2026-04-30,Thursday,,0,Open,338,534,499
+2026-05-01,Friday,,0,Open,320,533,485
+2026-05-02,Saturday,First Saturday,2,Open,225,343,329
+2026-05-03,Sunday,Sunday (Weekly Holiday),2,Open,180,254,225
+2026-05-04,Monday,,0,Open,317,510,531
+2026-05-05,Tuesday,,0,Open,317,536,502
+2026-05-06,Wednesday,,0,Open,319,517,489
+2026-05-07,Thursday,,0,Open,336,542,495
+2026-05-08,Friday,,0,Open,318,541,500
+2026-05-09,Saturday,,0,Open,248,389,362
+2026-05-10,Sunday,Sunday (Weekly Holiday),1,Open,198,290,246
+2026-05-11,Monday,,0,Open,315,518,548
+2026-05-12,Tuesday,,0,Open,332,544,498
+2026-05-13,Wednesday,,0,Open,317,525,485
+2026-05-14,Thursday,,0,Open,334,550,491
+2026-05-15,Friday,,0,Open,316,526,496
+2026-05-16,Saturday,Third Saturday,2,Open,221,357,322
+2026-05-17,Sunday,Sunday (Weekly Holiday),2,Open,192,248,218
+2026-05-18,Monday,,0,Open,313,526,543
+2026-05-19,Tuesday,,0,Open,330,529,494
+2026-05-20,Wednesday,,0,Open,315,533,481
+2026-05-21,Thursday,,0,Open,332,535,506
+2026-05-22,Friday,,0,Open,314,534,492
+2026-05-23,Saturday,,0,Open,244,382,354
+2026-05-24,Sunday,Sunday (Weekly Holiday),1,Open,211,283,257
+2026-05-25,Monday,,0,Open,311,511,539
+2026-05-26,Tuesday,,0,Open,328,537,490
+2026-05-27,Wednesday,Eid-ul-Zuha / Bakrid (calendar listing),1,Open,313,518,496
+2026-05-28,Thursday,,0,Open,330,543,502
+2026-05-29,Friday,,0,Open,329,519,488
+2026-05-30,Saturday,,0,Open,242,390,369
+2026-05-31,Sunday,Sunday (Weekly Holiday),1,Open,209,291,253
+2026-06-01,Monday,,0,Open,309,519,534
+2026-06-02,Tuesday,,0,Open,326,545,486
+2026-06-03,Wednesday,,0,Open,328,526,492
+2026-06-04,Thursday,,0,Open,328,551,498
+2026-06-05,Friday,,0,Open,327,527,484
+2026-06-06,Saturday,First Saturday,2,Open,216,358,328
+2026-06-07,Sunday,Sunday (Weekly Holiday),2,Open,186,248,224
+2026-06-08,Monday,,0,Open,307,527,530
+2026-06-09,Tuesday,,0,Open,324,530,501
+2026-06-10,Wednesday,,0,Open,326,534,488
+2026-06-11,Thursday,,0,Open,326,536,494
+2026-06-12,Friday,,0,Open,325,535,499
+2026-06-13,Saturday,,70,Closed,0,0,0
+2026-06-14,Sunday,Sunday (Weekly Holiday),70,Closed,0,0,0
+2026-06-15,Monday,,70,Closed,0,0,0
+2026-06-16,Tuesday,,70,Closed,0,0,0
+2026-06-17,Wednesday,,70,Closed,0,0,0
+2026-06-18,Thursday,,70,Closed,0,0,0
+2026-06-19,Friday,,70,Closed,0,0,0
+2026-06-20,Saturday,Third Saturday,70,Closed,0,0,0
+2026-06-21,Sunday,Sunday (Weekly Holiday),70,Closed,0,0,0
+2026-06-22,Monday,,70,Closed,0,0,0
+2026-06-23,Tuesday,,70,Closed,0,0,0
+2026-06-24,Wednesday,,70,Closed,0,0,0
+2026-06-25,Thursday,,70,Closed,0,0,0
+2026-06-26,Friday,,70,Closed,0,0,0
+2026-06-27,Saturday,,70,Closed,0,0,0
+2026-06-28,Sunday,Sunday (Weekly Holiday),70,Closed,0,0,0
+2026-06-29,Monday,,70,Closed,0,0,0
+2026-06-30,Tuesday,,70,Closed,0,0,0

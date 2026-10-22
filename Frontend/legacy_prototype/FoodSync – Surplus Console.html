@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FoodSync – Surplus Console</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#eef2ef;--card:#fff;--tx:#14261f;--mut:#5b6b64;--bd:#d5ded9;--ac:#1f7a4d;--ac2:#e0a21b;--bad:#c0392b;--side:#14342b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a16;--card:#17261f;--tx:#e6efea;--mut:#9bb0a6;--bd:#2a3d34;--ac:#4cc58a;--ac2:#f0b93a;--bad:#ef6a5a;--side:#0a120f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1a16;--card:#17261f;--tx:#e6efea;--mut:#9bb0a6;--bd:#2a3d34;--ac:#4cc58a;--ac2:#f0b93a;--bad:#ef6a5a;--side:#0a120f;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;min-height:100vh}
+aside{width:210px;background:var(--side);color:#dfeee6;padding:20px 12px;display:flex;flex-direction:column;gap:4px;flex:none}
+aside h1{font:700 20px Georgia,serif;margin:0 8px 16px}aside small{display:block;font:12px system-ui;opacity:.7}
+aside button{all:unset;cursor:pointer;padding:9px 12px;border-radius:8px;font-size:14px}aside button:hover{background:#ffffff14}aside button.on{background:var(--ac);color:#fff}
+aside button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ac2);outline-offset:2px}
+main{flex:1;min-width:0;padding:24px;max-width:1100px}
+h2{font:700 26px Georgia,serif;margin:0 0 4px}.sub{color:var(--mut);margin:0 0 18px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px;min-width:0}
+.card h3{margin:0 0 8px;font-size:15px}.big{font:700 32px Georgia,serif}.mut{color:var(--mut);font-size:13px}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:600 14px system-ui;cursor:pointer}.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 3px}input,select{width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid var(--bd)}.row:first-child{border-top:0}
+.tag{padding:2px 8px;border-radius:99px;font-size:12px;font-weight:600;background:var(--bd)}.crit{background:var(--bad);color:#fff}.mod{background:var(--ac2);color:#222}.ok{background:var(--ac);color:#fff}
+.view{display:none}.view.on{display:block}.chart{position:relative;height:250px}
+svg text{fill:var(--tx);font:11px system-ui}.scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:7px 6px;border-top:1px solid var(--bd)}
+@media(max-width:760px){body{flex-direction:column}aside{width:100%;flex-direction:row;overflow-x:auto;padding:10px}aside h1,aside small{display:none}aside button{white-space:nowrap}main{padding:16px}}
+.login{position:fixed;inset:0;background:var(--bg);z-index:9;display:flex;align-items:center;justify-content:center;padding:20px}.login .card{max-width:420px;width:100%}.login .btn{display:block;width:100%;margin-top:8px;text-align:left}@media print{aside,.noprint,.login{display:none}}
+</style></head><body><div class="login" id="login"><div class="card"><h2>FoodSync</h2><p class="sub">Choose a demo account. This prototype has no passwords; the real build signs users in with tokens and checks the role on the server.</p><div id="lg"></div></div></div>
+<aside><h1>FoodSync<small>Surplus console · demo data</small></h1>
+<button data-v="dash" class="on">Overview</button><button data-v="kit">Kitchen</button><button data-v="dis">Dispatch</button><button data-v="iot">Quality &amp; IoT</button><button data-v="pro">Processing unit</button><button data-v="drv">Driver trips</button><button data-v="esg">Impact &amp; ESG</button>
+<small id="who" style="margin-top:auto;padding:0 12px 6px"></small><button id="so">Switch role</button><button id="th">Switch theme</button></aside>
+<main>
+<section class="view on" id="dash"><h2>Today’s overview</h2><p class="sub">Every figure below updates when you claim a batch in Dispatch.</p>
+<div class="grid" id="kpi"></div>
+<div class="grid"><div class="card"><h3>Meals served vs. forecast (14 days)</h3><div class="chart"><canvas id="c1"></canvas></div></div>
+<div class="card"><h3>Audit trail</h3><div class="mut">Each entry is hash-chained to the one before it.</div><div id="log"></div></div></div></section>
+
+<section class="view" id="kit"><h2>Kitchen</h2><p class="sub">Plan tomorrow’s cooking, then post what is left over.</p>
+<div class="grid"><div class="card"><h3>Tomorrow’s production plan</h3><div class="big" id="plan"></div><div class="mut" id="plan2"></div><p class="mut">Cook quantity is the upper forecast band, so a busy day never runs short. The model beats a same-weekday baseline: error 6.1% vs 11.8% (simulated).</p></div>
+<div class="card"><h3>Post surplus food</h3><label for="fn">Dish</label><input id="fn" value="Paneer pulao"><label for="fk">Quantity (kg)</label><input id="fk" type="number" value="40" min="1">
+<label for="fc">Category</label><select id="fc"></select><label for="ft">Room temperature: <b id="ftv">32</b> °C</label><input id="ft" type="range" min="5" max="45" value="32">
+<div class="row"><span>Safe window</span><b id="fw"></b></div><button class="btn" id="post">Send to nearby NGOs</button></div></div></section>
+
+<section class="view" id="dis"><h2>Dispatch</h2><p class="sub">Recipients are ranked by distance, spare capacity and time left before the food turns unsafe.</p>
+<div id="dmsg"></div><div class="grid" id="dgrid"></div></section>
+
+<section class="view" id="iot"><h2>Quality &amp; storage</h2><p class="sub">Simulated sensor nodes (ESP32 with temperature and gas sensors) refresh every 2 seconds.</p>
+<div class="grid" id="units"></div>
+<div class="card"><h3>Photo freshness check</h3><input type="file" accept="image/*" id="img" aria-label="Upload a food photo"><div id="imgr" class="mut" style="margin-top:8px">Upload a photo of produce. This demo scores colour and brightness only; a trained classifier replaces it later.</div></div></section>
+
+<section class="view" id="pro"><h2>Processing unit</h2><p class="sub">Line 2 · packaged snacks · last 7 days (simulated)</p>
+<div class="grid"><div class="card"><h3>Overall equipment effectiveness</h3><div class="big">78%</div><div class="mut">Target 85%</div></div><div class="card"><h3>Yield</h3><div class="big">91.4%</div><div class="mut">Standard 93.0% · scrap cost ₹18,400</div></div><div class="card"><h3>Energy per tonne</h3><div class="big">412 kWh</div><div class="mut">+9% vs last week</div></div></div>
+<div class="grid"><div class="card"><h3>Downtime by cause (minutes)</h3><div class="chart"><canvas id="c2"></canvas></div></div>
+<div class="card"><h3>Anomalies found</h3><div class="scroll"><table><tbody id="anom"></tbody></table></div><button class="btn alt" id="scan" style="margin-top:10px">Run anomaly scan</button></div></div></section>
+
+<section class="view" id="drv"><h2>Driver trips</h2><p class="sub">One vehicle, several pickups. The route is planned so each food is delivered inside its safe window.</p><div id="dr"></div></section>
+
+<section class="view" id="esg"><h2>Impact &amp; ESG</h2><p class="sub">Emission factors are indicative and must be checked against FAO or WRI figures before any public report.</p>
+<div class="grid" id="ek"></div><div class="grid"><div class="card"><h3>CO₂e avoided by food type (kg)</h3><div class="chart"><canvas id="c3"></canvas></div></div>
+<div class="card"><h3>Reporting indicators</h3><div id="ind"></div><button class="btn noprint" id="pr" style="margin-top:12px">Print or save report</button></div></div></section>
+</main>
+<script>
+const $=s=>document.querySelector(s),r=i=>Math.abs(Math.sin(i*12.9898)*43758.5453)%1;
+const CAT={"Cooked rice and grains":{h:6,f:2.7},"Dairy and paneer gravies":{h:4,f:4.2},"Bakery items":{h:24,f:1.3},"Fresh produce":{h:48,f:.9}};
+const S={by:{"Cooked rice and grains":410,"Dairy and paneer gravies":180,"Bakery items":260,"Fresh produce":390},batch:null,log:[],ch:{}};
+const NGO=[["Robin Hood Army",150,120,80],["Feeding Hope Shelter",430,90,60],["Asha Community Kitchen",470,300,200],["Seva Food Bank",120,300,300],["Bal Sahara Home",300,60,45]];
+const win=(c,t)=>Math.max(.5,CAT[c].h*Math.pow(2,(25-t)/10));
+const fmt=h=>h<1?Math.round(h*60)+" min":h.toFixed(1)+" h",urg=h=>h<2?["crit","Critical"]:h<5?["mod","Moderate"]:["ok","Comfortable"];
+const hash=s=>{let h=5381;for(const c of s)h=((h<<5)+h+c.charCodeAt(0))>>>0;return h.toString(16).padStart(8,"0")};
+function addLog(t){const p=S.log.length?S.log[0].h:"00000000";S.log.unshift({t,h:hash(p+t)});S.log=S.log.slice(0,5)}
+const tot=()=>{const k=Object.values(S.by).reduce((a,b)=>a+b,0),c=Object.entries(S.by).reduce((a,[n,v])=>a+v*CAT[n].f,0);return{k,c,m:Math.round(k/.4),rs:k*70}};
+function mk(id,cfg){S.ch[id]&&S.ch[id].destroy();const st=getComputedStyle(document.documentElement);Chart.defaults.color=st.getPropertyValue("--mut");Chart.defaults.borderColor=st.getPropertyValue("--bd");cfg.options={...cfg.options,responsive:true,maintainAspectRatio:false};S.ch[id]=new Chart($("#"+id),cfg)}
+const kp=(l,v,s)=>`<div class="card"><div class="mut">${l}</div><div class="big">${v}</div><div class="mut">${s}</div></div>`;
+function kpis(){const t=tot();$("#kpi").innerHTML=kp("Food rescued",t.k.toLocaleString("en-IN")+" kg","This month")+kp("Meals provided",t.m.toLocaleString("en-IN"),"0.4 kg per meal")+kp("CO₂e avoided",Math.round(t.c).toLocaleString("en-IN")+" kg","Landfill methane avoided")+kp("Value recovered","₹"+t.rs.toLocaleString("en-IN"),"At ₹70 per kg");
+$("#log").innerHTML=S.log.map(l=>`<div class="row"><span>${l.t}</span><code class="mut">${l.h}</code></div>`).join("")||'<div class="mut" style="padding:8px 0">No hand-offs yet. Claim a batch in Dispatch.</div>'}
+function fc(){const L=[],A=[],P=[],U=[];for(let i=0;i<14;i++){const b=(i%7>4)?230:430,a=Math.round(b*(1+(r(i)-.5)*.2)),p=Math.round(b*(1+(r(i+40)-.5)*.05));L.push("Day "+(i+1));A.push(a);P.push(p);U.push(Math.round(p*1.08))}return{L,A,P,U}}
+function show(v){document.querySelectorAll(".view").forEach(e=>e.classList.toggle("on",e.id===v));document.querySelectorAll("aside button[data-v]").forEach(b=>b.classList.toggle("on",b.dataset.v===v));draw(v)}
+function draw(v){if(v==="dash"){kpis();const d=fc();mk("c1",{type:"line",data:{labels:d.L,datasets:[{label:"Actual",data:d.A,borderColor:"#e0a21b",tension:.3},{label:"Forecast",data:d.P,borderColor:"#1f7a4d",borderDash:[5,4],tension:.3},{label:"Upper band",data:d.U,borderColor:"#7fb89c",pointRadius:0,tension:.3}]}})}
+if(v==="kit"){$("#plan").textContent="1,340 meals";$("#plan2").textContent="Forecast 1,240 plus 8% safety margin. Tomorrow is a weekday with an exam schedule.";sw()}
+if(v==="dis")disp();if(v==="drv")drv();if(v==="esg"){const t=tot();$("#ek").innerHTML=kp("Food diverted",t.k+" kg","From landfill")+kp("Net CO₂e avoided",Math.round(t.c)+" kg","Per-category factors")+kp("Surplus redistributed","83%","Of all surplus logged");
+$("#ind").innerHTML=["Principle 6 · waste managed: "+t.k+" kg","Hand-offs verified by one-time code","Audit chain: "+S.log.length+" recent entries intact"].map(x=>`<div class="row">${x}</div>`).join("");
+mk("c3",{type:"bar",data:{labels:Object.keys(S.by),datasets:[{data:Object.entries(S.by).map(([n,v])=>Math.round(v*CAT[n].f)),backgroundColor:"#1f7a4d"}]},options:{plugins:{legend:{display:false}}}})}
+if(v==="pro"){mk("c2",{type:"bar",data:{labels:["Packing jam","Changeover","Boiler fault","Material wait","Cleaning"],datasets:[{data:[142,96,74,51,38],backgroundColor:["#c0392b","#e0a21b","#e0a21b","#7fb89c","#7fb89c"]}]},options:{indexAxis:"y",plugins:{legend:{display:false}}}});anomaly(true)}}
+function sw(){const c=$("#fc").value,t=+$("#ft").value;$("#ftv").textContent=t;const h=win(c,t),u=urg(h);$("#fw").innerHTML=`${fmt(h)} <span class="tag ${u[0]}">${u[1]}</span>`}
+function disp(){const b=S.batch;if(!b){$("#dmsg").innerHTML="";$("#dgrid").innerHTML='<div class="card">Nothing waiting. Post a surplus batch from Kitchen.</div>';return}
+const left=Math.max(0,b.h-(Date.now()-b.t)/36e5),u=urg(left),C=2*Math.PI*44,pc=Math.min(1,left/8);
+const rk=NGO.map(([n,x,y,cap])=>{const km=Math.hypot(x-300,y-190)/30,mins=km/25*60,ok=mins<left*60&&cap>=Math.min(b.k,20);return{n,x,y,cap,km,mins,ok,s:ok?.4*(1-km/12)+.3*Math.min(1,cap/b.k)+.3*Math.min(1,(left*60-mins)/(left*60)):-1}}).sort((a,z)=>z.s-a.s);
+$("#dmsg").innerHTML="";
+$("#dgrid").innerHTML=`<div class="card"><h3>${b.n} · ${b.k} kg</h3><svg viewBox="0 0 110 110" width="150" role="img" aria-label="Safe window left: ${fmt(left)}"><circle cx="55" cy="55" r="44" fill="none" stroke="var(--bd)" stroke-width="9"/><circle cx="55" cy="55" r="44" fill="none" stroke="${u[0]=="crit"?"var(--bad)":u[0]=="mod"?"var(--ac2)":"var(--ac)"}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C*pc} ${C}" transform="rotate(-90 55 55)"/><text x="55" y="53" text-anchor="middle" style="font:700 17px Georgia">${fmt(left)}</text><text x="55" y="70" text-anchor="middle">safe window</text></svg>
+<svg viewBox="0 0 600 380" width="100%" style="background:var(--bg);border-radius:8px;margin-top:8px" role="img" aria-label="Map of kitchen and NGOs"><circle cx="300" cy="190" r="9" fill="var(--ac2)"/><text x="312" y="186">Kitchen</text>${rk.map((k,i)=>`<line x1="300" y1="190" x2="${k.x}" y2="${k.y}" stroke="${k.ok?"var(--ac)":"var(--bd)"}" stroke-dasharray="${k.ok?0:4}"/><circle cx="${k.x}" cy="${k.y}" r="${i==0&&k.ok?11:7}" fill="${k.ok?"var(--ac)":"var(--mut)"}"/><text x="${k.x+12}" y="${k.y+4}">${k.n}</text>`).join("")}</svg></div>
+<div class="card"><h3>Ranked recipients</h3>${rk.map((k,i)=>`<div class="row"><div><b>${k.n}</b><div class="mut">${k.km.toFixed(1)} km · ${Math.round(k.mins)} min drive · takes ${k.cap} kg</div></div>${k.ok?`<button class="btn" data-c="${i}">Claim</button>`:'<span class="tag">Cannot reach in time</span>'}</div>`).join("")}</div>`;
+document.querySelectorAll("[data-c]").forEach(e=>e.onclick=()=>{const k=rk[+e.dataset.c],q=Math.min(b.k,k.cap),otp=String(100000+Math.floor(Math.random()*9e5));S.jobs.push({kit:0,ng:NGO.findIndex(a=>a[0]===k.n),kg:q,c:b.c,dl:Math.round(left*60),otp});addLog(`${k.n} reserved ${q} kg`);S.batch=null;disp();$("#dmsg").innerHTML=`<div class="card" style="margin-bottom:14px;border-color:var(--ac)"><h3>Reserved for ${k.n}</h3>Hand-off code <b style="font:700 28px Georgia">${otp}</b><div class="mut">The receiver gives this code to the driver at delivery. A trip was added under Driver trips, and the kg count once it is delivered.</div></div>`})}
+function tk(){const U=[["Cold room",3,5,"cold"],["Hot-hold counter",67,0,"hot"],["Dry store",26,0,"dry"]];$("#units").innerHTML=U.map((u,i)=>{const t=u[1]+(r(Date.now()/2000+i)-.5)*(u[3]=="cold"?5:4)+(u[3]=="cold"&&Math.floor(Date.now()/16000)%3==0?2.5:0),g=Math.round(120+r(i+Date.now()/5000)*(i==0?260:110)),bad=(u[3]=="cold"&&t>5)||(u[3]=="hot"&&t<60)||g>300;
+return `<div class="card"><h3>${u[0]}</h3><div class="big">${t.toFixed(1)} °C</div><div class="mut">Gas ${g} ppm</div><span class="tag ${bad?"crit":"ok"}">${bad?(g>300?"Spoilage gas high":"Out of safe range"):"Within range"}</span></div>`}).join("")}
+function anomaly(init){const A=[["Line 2 motor","Energy 38% above normal for this load","High"],["Mixer 1","Raw material loss 4.1% against 2.5% standard","Medium"]];if(!init)A.unshift(["Boiler 1","Temperature swing outside 3σ at "+new Date().toLocaleTimeString("en-IN"),"High"]);$("#anom").innerHTML=A.map(a=>`<tr><td><b>${a[0]}</b><div class="mut">${a[1]}</div></td><td><span class="tag ${a[2]=="High"?"crit":"mod"}">${a[2]}</span></td></tr>`).join("")}
+document.querySelectorAll("aside button[data-v]").forEach(b=>b.onclick=()=>show(b.dataset.v));
+$("#fc").innerHTML=Object.keys(CAT).map(c=>`<option>${c}</option>`).join("");$("#fc").onchange=$("#ft").oninput=sw;
+$("#post").onclick=()=>{const c=$("#fc").value,t=+$("#ft").value;S.batch={n:$("#fn").value||"Surplus food",k:Math.max(1,+$("#fk").value),c,h:win(c,t),t:Date.now()};addLog("Posted "+S.batch.k+" kg "+S.batch.n);show("dis")};
+$("#scan").onclick=()=>anomaly(false);$("#pr").onclick=()=>{try{window.print()}catch(e){}};
+$("#th").onclick=()=>{const d=document.documentElement,dark=getComputedStyle(d).colorScheme==="dark";d.dataset.theme=dark?"light":"dark";show(document.querySelector(".view.on").id)};
+$("#img").onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement("canvas");c.width=c.height=32;const x=c.getContext("2d");x.drawImage(im,0,0,32,32);const d=x.getImageData(0,0,32,32).data;let dark=0,br=0,n=d.length/4;for(let i=0;i<d.length;i+=4){const l=(d[i]+d[i+1]+d[i+2])/3;br+=l;if(l<60)dark++}br/=n;const bad=dark/n,s=Math.round(Math.max(0,Math.min(100,100-bad*160-(br<80?25:0))));$("#imgr").innerHTML=`<img src="${rd.result}" alt="Uploaded food" style="height:90px;border-radius:8px;vertical-align:middle;margin-right:10px"><b>Freshness score ${s}/100</b> <span class="tag ${s>70?"ok":s>45?"mod":"crit"}">${s>70?"Fresh":s>45?"Inspect":"Likely spoiled"}</span>`};im.src=rd.result};rd.readAsDataURL(f)};
+const KIT=[[300,190,"Main canteen"],[90,80,"Hostel mess"],[520,330,"Factory unit"]];
+const ROLE={kitchen:{n:"Kitchen manager",v:["dash","kit","dis","iot","esg"]},ngo:{n:"NGO coordinator",v:["dash","dis","esg"]},driver:{n:"Driver",v:["drv"]},plant:{n:"Plant manager",v:["dash","pro","iot","esg"]},auditor:{n:"Auditor",v:["dash","esg"]}};
+S.jobs=[{kit:1,ng:3,kg:60,c:"Bakery items",dl:150,otp:"482913"},{kit:2,ng:2,kg:45,c:"Cooked rice and grains",dl:75,otp:"205771"},{kit:0,ng:4,kg:30,c:"Fresh produce",dl:300,otp:"773104"}];
+function loginUI(){$("#lg").innerHTML=Object.entries(ROLE).map(([k,o])=>`<button class="btn" data-r="${k}">${o.n}</button>`).join("");$("#login").style.display="flex";document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{const o=ROLE[b.dataset.r];$("#login").style.display="none";$("#who").textContent="Signed in as "+o.n;document.querySelectorAll("aside button[data-v]").forEach(x=>x.style.display=o.v.includes(x.dataset.v)?"":"none");show(o.v[0])})}
+$("#so").onclick=loginUI;
+function plan(){const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1])/30,sp=25/60,dep=[300,190],J=S.jobs.map((j,i)=>({...j,i,p:0,d:0}));let pos=dep,t=0,load=0,km=0;const st=[];
+for(let n=0;n<J.length*2;n++){let b=null;J.forEach(j=>{if(j.d)return;if(!j.p&&load+j.kg>150)return;const g=j.p?[NGO[j.ng][1],NGO[j.ng][2]]:[KIT[j.kit][0],KIT[j.kit][1]],dd=dist(pos,g),s=dd+(j.dl-t)/30;if(!b||s<b.s)b={j,g,dd,s}});
+if(!b)break;const pick=!b.j.p;t+=b.dd/sp;km+=b.dd;pos=b.g;if(pick){b.j.p=1;load+=b.j.kg}else{b.j.d=1;load-=b.j.kg}st.push({j:b.j,g:b.g,pick,eta:Math.round(t),late:!pick&&t>b.j.dl})}
+km+=dist(pos,dep);const base=S.jobs.reduce((a,j)=>{const k=KIT[j.kit],n=NGO[j.ng],g=[n[1],n[2]];return a+dist(dep,k)+dist(k,g)+dist(g,dep)},0);return{st,km,base,left:J.filter(j=>!j.d).length}}
+function drv(){const el=$("#dr");if(!S.jobs.length){el.innerHTML='<div class="card">No trips waiting. Claims made in Dispatch appear here.</div>';return}
+const p=plan(),pts=[[300,190],...p.st.map(s=>s.g),[300,190]];
+el.innerHTML=`<div class="grid"><div class="card"><h3>Planned route</h3><div class="big">${p.km.toFixed(1)} km</div><div class="mut">${Math.round((1-p.km/p.base)*100)}% shorter than ${p.base.toFixed(1)} km with one trip per pickup. Capacity 150 kg, 25 km/h.${p.left?` ${p.left} job(s) need a second vehicle.`:""}</div><svg viewBox="0 0 600 380" width="100%" style="background:var(--bg);border-radius:8px;margin-top:8px" role="img" aria-label="Route map"><polyline points="${pts.map(a=>a[0]+","+a[1]).join(" ")}" fill="none" stroke="var(--ac)" stroke-width="2.5"/>${p.st.map((s,i)=>`<circle cx="${s.g[0]}" cy="${s.g[1]}" r="11" fill="${s.pick?"var(--ac2)":"var(--ac)"}"/><text x="${s.g[0]}" y="${s.g[1]+4}" text-anchor="middle" style="fill:#fff;font-weight:700">${i+1}</text>`).join("")}</svg></div>
+<div class="card"><h3>Stops</h3>${p.st.map((s,i)=>{const j=s.j,n=NGO[j.ng][0];return `<div class="row" style="align-items:flex-start"><div><b>${i+1}. ${s.pick?"Pick up "+j.kg+" kg at "+KIT[j.kit][2]:"Deliver to "+n}</b><div class="mut">Arrive in about ${s.eta} min · ${j.c}${s.late?" · too late":""}</div>${s.pick?"":`<div class="mut">Demo code: ${j.otp}</div>`}</div>${s.pick?"":`<span><input style="width:90px" placeholder="Code" id="o${j.i}" aria-label="Code for ${n}"> <button class="btn" data-d="${j.i}">Confirm</button></span>`}</div>`}).join("")}</div></div>`;
+document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{const i=+b.dataset.d,j=S.jobs[i];if($("#o"+i).value!==j.otp){$("#o"+i).style.borderColor="var(--bad)";return}S.by[j.c]+=j.kg;addLog(NGO[j.ng][0]+" received "+j.kg+" kg (code verified)");S.jobs.splice(i,1);drv()})}
+addLog("Posted 120 kg bakery items");addLog("Seva Food Bank received 120 kg");
+S.batch={n:"Paneer pulao",k:40,c:"Dairy and paneer gravies",h:win("Dairy and paneer gravies",32),t:Date.now()};
+tk();setInterval(()=>{if($("#iot").classList.contains("on"))tk()},2000);loginUI();
+</script></body></html>

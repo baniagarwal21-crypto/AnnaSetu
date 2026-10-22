@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Anna-Setu – FoodSync Console</title>
+  
+  <!-- Chart.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  
+  <!-- Leaflet CSS & JS for OpenStreetMap -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Login Modal -->
+  <div class="login" id="login">
+    <div class="card">
+      <h2>Anna-Setu</h2>
+      <p class="sub">Choose a demo account. This prototype has no passwords; the real build signs users in with tokens and checks the role on the server.</p>
+      <div id="lg"></div>
+    </div>
+  </div>
+
+  <!-- Sidebar Navigation -->
+  <aside>
+    <h1>Anna-Setu<small>Surplus console · demo data</small></h1>
+    <button data-v="dash" class="on">Overview</button>
+    <button data-v="kit">Kitchen</button>
+    <button data-v="dis">Dispatch</button>
+    <button data-v="iot">Quality &amp; IoT</button>
+    <button data-v="pro">Processing unit</button>
+    <button data-v="drv">Driver trips</button>
+    <button data-v="esg">Impact &amp; ESG</button>
+    <small id="who" style="margin-top:auto;padding:0 12px 6px"></small>
+    <button id="so">Switch role</button>
+    <button id="th">Switch theme</button>
+  </aside>
+
+  <!-- Main Content Views -->
+  <main>
+    <!-- Overview Tab -->
+    <section class="view on" id="dash">
+      <h2>Today’s overview</h2>
+      <p class="sub">Every figure below updates when you claim a batch in Dispatch.</p>
+      <div class="grid" id="kpi"></div>
+      <div class="grid">
+        <div class="card">
+          <h3>Meals served vs. forecast (14 days)</h3>
+          <div class="chart"><canvas id="c1"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>Audit trail</h3>
+          <div class="mut">Each entry is hash-chained to the one before it.</div>
+          <div id="log"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kitchen Tab -->
+    <section class="view" id="kit">
+      <h2>Kitchen</h2>
+      <p class="sub">Plan tomorrow’s cooking, then post what is left over.</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Tomorrow’s production plan</h3>
+          <div class="big" id="plan"></div>
+          <div class="mut" id="plan2"></div>
+          <p class="mut">Cook quantity is the upper forecast band, so a busy day never runs short. The Random Forest model predicts exact meal turnout based on hostel history.</p>
+        </div>
+        <div class="card">
+          <h3>Post surplus food</h3>
+          <label for="fn">Dish</label>
+          <input id="fn" value="Paneer pulao">
+          <label for="fk">Quantity (kg)</label>
+          <input id="fk" type="number" value="40" min="1">
+          <label for="fc">Category</label>
+          <select id="fc"></select>
+          <label for="ft">Room temperature: <b id="ftv">32</b> °C</label>
+          <input id="ft" type="range" min="5" max="45" value="32">
+          <div class="row"><span>Safe window</span><b id="fw"></b></div>
+          <button class="btn" id="post">Send to nearby NGOs</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dispatch Tab -->
+    <section class="view" id="dis">
+      <h2>Dispatch</h2>
+      <p class="sub">Recipients are ranked by distance, spare capacity and time left before the food turns unsafe.</p>
+      <div id="dmsg"></div>
+      <div class="grid" id="dgrid"></div>
+    </section>
+
+    <!-- Quality & IoT Tab -->
+    <section class="view" id="iot">
+      <h2>Quality &amp; storage</h2>
+      <p class="sub">Simulated sensor nodes (ESP32 with temperature and gas sensors) refresh every 2 seconds.</p>
+      <div class="grid" id="units"></div>
+      <div class="card">
+        <h3>Photo freshness check</h3>
+        <input type="file" accept="image/*" id="img" aria-label="Upload a food photo">
+        <div id="imgr" class="mut" style="margin-top:8px">Upload a photo of produce. This demo scores colour and brightness only; a trained classifier replaces it later.</div>
+      </div>
+    </section>
+
+    <!-- Processing Unit Tab -->
+    <section class="view" id="pro">
+      <h2>Processing unit</h2>
+      <p class="sub">Line 2 · packaged snacks · last 7 days (simulated)</p>
+      <div class="grid">
+        <div class="card">
+          <h3>Overall equipment effectiveness</h3>
+          <div class="big">78%</div>
+          <div class="mut">Target 85%</div>
+        </div>
+        <div class="card">
+          <h3>Yield</h3>
+          <div class="big">91.4%</div>
+          <div class="mut">Standard 93.0% · scrap cost ₹18,400</div>
+        </div>
+        <div class="card">
+          <h3>Energy per tonne</h3>
+          <div class="big">412 kWh</div>
+          <div class="mut">+9% vs last week</div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Downtime by cause (minutes)</h3>
+          <div class="chart"><canvas id="c2"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>Anomalies found</h3>
+          <div class="scroll">
+            <table><tbody id="anom"></tbody></table>
+          </div>
+          <button class="btn alt" id="scan" style="margin-top:10px">Run anomaly scan</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Driver Trips Tab -->
+    <section class="view" id="drv">
+      <h2>Driver trips</h2>
+      <p class="sub">One vehicle, several pickups. The route is planned so each food is delivered inside its safe window.</p>
+      <div id="dr"></div>
+    </section>
+
+    <!-- Impact & ESG Tab -->
+    <section class="view" id="esg">
+      <h2>Impact &amp; ESG</h2>
+      <p class="sub">Emission factors are indicative and must be checked against FAO or WRI figures before any public report.</p>
+      <div class="grid" id="ek"></div>
+      <div class="grid">
+        <div class="card">
+          <h3>CO₂e avoided by food type (kg)</h3>
+          <div class="chart"><canvas id="c3"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>Reporting indicators</h3>
+          <div id="ind"></div>
+          <button class="btn noprint" id="pr" style="margin-top:12px">Print or save report</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- External JavaScript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>

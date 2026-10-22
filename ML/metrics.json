@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "model": {
+      "breakfast": {
+        "mae": 11.81,
+        "mape_pct": 8.64,
+        "r2": 0.7267
+      },
+      "lunch": {
+        "mae": 17.5,
+        "mape_pct": 8.21,
+        "r2": 0.794
+      },
+      "dinner": {
+        "mae": 16.15,
+        "mape_pct": 8.19,
+        "r2": 0.8125
+      }
+    },
+    "baseline": {
+      "breakfast": {
+        "mae": 23.02,
+        "mape_pct": 14.04,
+        "r2": 0.4997
+      },
+      "lunch": {
+        "mae": 36.16,
+        "mape_pct": 13.76,
+        "r2": 0.615
+      },
+      "dinner": {
+        "mae": 34.12,
+        "mape_pct": 13.9,
+        "r2": 0.6431
+      }
+    }
+  },
+  "upper_margin": {
+    "breakfast": 8.6,
+    "lunch": 11.2,
+    "dinner": 9.7
+  },
+  "lower_margin": {
+    "breakfast": -7.8,
+    "lunch": -9.7,
+    "dinner": -9.3
+  },
+  "trained_from": "2025-08-21",
+  "trained_to": "2026-06-12",
+  "n_open_days": 251,
+  "feature_importance": {
+    "holiday_run_pos": 0.38192941603737546,
+    "holiday_run_len": 0.37044760402490046,
+    "dow": 0.23116889443737182,
+    "is_sunday": 0.012980421396008471,
+    "is_public_holiday": 0.0020790744661444366,
+    "days_since_closed": 0.0007709314063591764,
+    "days_to_next_closed": 0.00044406244789866255,
+    "is_first_sat": 0.00014948137011329488,
+    "is_third_sat": 3.011441382825486e-05
+  },
+  "note": "Tested month by month on open days. One year of data only."
+}

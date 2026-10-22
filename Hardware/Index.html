@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --green: #16834a;
+      --dark: #116638;
+      --light: #eaf7ef;
+      --border: #dce8df;
+      --text: #26352b;
+      --muted: #6b7a70;
+      --red: #c83e3e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f8f5;
+      color: var(--text);
+    }
+
+    header {
+      background: white;
+      padding: 22px 5%;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--green);
+      font-size: 27px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    .live {
+      background: var(--light);
+      color: var(--dark);
+      border-radius: 20px;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 1400px;
+      margin: auto;
+      padding: 24px 5%;
+    }
+
+    .section-title {
+      margin: 25px 0 14px;
+      font-size: 19px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 7px #173b2010;
+    }
+
+    .card-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card-value {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--green);
+      margin-top: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 7px;
+      color: #46564a;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #ccd9cf;
+      border-radius: 7px;
+      font-size: 14px;
+      background: white;
+    }
+
+    button {
+      border: 0;
+      background: var(--green);
+      color: white;
+      padding: 12px 17px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    button:hover { background: var(--dark); }
+    button:disabled { opacity: .6; cursor: wait; }
+
+    .table-wrap {
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 650px;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 13px 12px;
+      text-align: left;
+      border-bottom: 1px solid #e7eee9;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #eff8f1;
+      color: #245a37;
+      font-weight: bold;
+    }
+
+    tbody tr:hover { background: #f8fbf9; }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: var(--light);
+      color: var(--dark);
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .message {
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--green);
+    }
+
+    .error { color: var(--red); }
+
+    .empty {
+      padding: 22px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .toolbar .section-title { margin: 0; }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 25px;
+      font-size: 12px;
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 24px 0 18px;
+      padding: 8px;
+      background: #e8f2eb;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .tab-button {
+      flex: 1 1 160px;
+      background: transparent;
+      color: var(--dark);
+      border: 1px solid transparent;
+      min-height: 44px;
+    }
+
+    .tab-button:hover { background: #d8ebde; }
+
+    .tab-button.active {
+      background: var(--green);
+      color: white;
+      box-shadow: 0 2px 5px #173b2018;
+    }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    @media (max-width: 800px) {
+      .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      h1 { font-size: 23px; }
+    }
+
+    @media (max-width: 480px) {
+      .form-grid { grid-template-columns: 1fr; }
+      main { padding: 18px 4%; }
+      .panel { padding: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>Anna-Setu</h1>
+      <div class="subtitle">Smart Mess Monitoring & Food Waste Dashboard</div>
+    </div>
+    <div class="live">● Live Dataset <span id="lastUpdated"></span></div>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <h2 class="section-title">Dashboard Overview</h2>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-label">Today's Breakfast</div>
+        <div class="card-value" id="breakfast">—</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Today's Lunch</div>
+        <div class="card-value" id="lunch">—</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Today's Dinner</div>
+        <div class="card-value" id="dinner">—</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Mess Status</div>
+        <div class="card-value" id="messStatus">—</div>
+      </div>
+    </div>
+
+    <nav class="tab-nav" role="tablist" aria-label="Dashboard sections">
+      <button type="button" class="tab-button active" id="tab-summary"
+              role="tab" aria-selected="true" aria-controls="pane-summary"
+              onclick="showTab('summary')">Meal Attendance Summary</button>
+      <button type="button" class="tab-button" id="tab-food"
+              role="tab" aria-selected="false" aria-controls="pane-food"
+              onclick="showTab('food')">Food Records</button>
+      <button type="button" class="tab-button" id="tab-rfid"
+              role="tab" aria-selected="false" aria-controls="pane-rfid"
+              onclick="showTab('rfid')">RFID Attendance</button>
+    </nav>
+
+    <section id="pane-summary" class="tab-pane active" role="tabpanel" aria-labelledby="tab-summary">
+    <h2 class="section-title">Meal Attendance Summary</h2>
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Day</th>
+              <th>Holiday</th>
+              <th>Consecutive Holidays</th>
+              <th>Mess Status</th>
+              <th>Breakfast</th>
+              <th>Lunch</th>
+              <th>Dinner</th>
+            </tr>
+          </thead>
+          <tbody id="summaryBody">
+            <tr><td colspan="8" class="empty">Loading data…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </section>
+
+    <section id="pane-food" class="tab-pane" role="tabpanel" aria-labelledby="tab-food">
+    <h2 class="section-title">Add Food Record</h2>
+    <div class="panel">
+      <form id="foodForm">
+        <div class="form-grid">
+          <div>
+            <label for="foodName">Food Name</label>
+            <input id="foodName" maxlength="100" required
+                   placeholder="e.g. Rice">
+          </div>
+          <div>
+            <label for="quantity">Prepared Quantity (kg)</label>
+            <input id="quantity" type="number" min="0" step="0.01"
+                   required placeholder="e.g. 25">
+          </div>
+          <div>
+            <label for="waste">Food Waste (kg)</label>
+            <input id="waste" type="number" min="0" step="0.01"
+                   required placeholder="e.g. 3">
+          </div>
+          <div>
+            <button id="saveButton" type="submit">Save Food Record</button>
+          </div>
+        </div>
+        <div id="formMessage" class="message" role="status"></div>
+      </form>
+    </div>
+
+    <h2 class="section-title">Recent Food Records</h2>
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Food Name</th>
+              <th>Quantity (kg)</th>
+              <th>Waste (kg)</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="foodBody">
+            <tr><td colspan="5" class="empty">Loading data…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </section>
+
+    <section id="pane-rfid" class="tab-pane" role="tabpanel" aria-labelledby="tab-rfid">
+    <h2 class="section-title">Recent RFID Attendance</h2>
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Student</th>
+              <th>UID</th>
+              <th>Date</th>
+              <th>Meal</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="attendanceBody">
+            <tr><td colspan="6" class="empty">Loading data…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </section>
+
+    <div id="pageMessage" class="message" role="status"></div>
+  </main>
+
+  <footer>Anna-Setu · Smart Mess Monitoring System</footer>
+
+  <script>
+    let loading = false;
+
+    function showTab(name) {
+      const names = ["summary", "food", "rfid"];
+      names.forEach(tab => {
+        const pane = document.getElementById("pane-" + tab);
+        const button = document.getElementById("tab-" + tab);
+        const active = tab === name;
+        pane.classList.toggle("active", active);
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
+    function escapeHTML(value) {
+      return String(value == null ? "" : value).replace(/[&<>"']/g, c => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[c]);
+    }
+
+    function showRows(id, rows, columns, emptyText) {
+      const body = document.getElementById(id);
+      if (!rows || rows.length === 0) {
+        body.innerHTML =
+          `<tr><td class="empty" colspan="${columns}">${escapeHTML(emptyText)}</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = rows.map(row =>
+        "<tr>" + row.map((value, index) => {
+          const safe = escapeHTML(value === undefined || value === null ? "" : value);
+          return index === row.length - 1 && id === "attendanceBody"
+            ? `<td><span class="status">${safe}</span></td>`
+            : `<td>${safe}</td>`;
+        }).join("") + "</tr>"
+      ).join("");
+    }
+
+    function displayTime(value) {
+      if (!value) return "";
+      if (value instanceof Date) return value.toLocaleString();
+      return String(value);
+    }
+
+    function refreshData() {
+      if (loading) return;
+      loading = true;
+      const pageMessage = document.getElementById("pageMessage");
+      pageMessage.className = "message";
+      pageMessage.textContent = "Updating dashboard…";
+
+      google.script.run
+        .withSuccessHandler(data => {
+          loading = false;
+
+          if (!data || data.status !== "success") {
+            document.getElementById("pageMessage").textContent =
+              "Dashboard response: " + JSON.stringify(data);
+            return;
+          }
+
+          const today = new Date();
+          const yyyy = today.getFullYear();
+          const mm = String(today.getMonth() + 1).padStart(2, "0");
+          const dd = String(today.getDate()).padStart(2, "0");
+          const todayKey = `${yyyy}-${mm}-${dd}`;
+
+          const todayRecord = (data.summary || []).find(r => r.date === todayKey);
+
+          document.getElementById("breakfast").textContent =
+            todayRecord ? todayRecord.breakfast : "0";
+          document.getElementById("lunch").textContent =
+            todayRecord ? todayRecord.lunch : "0";
+          document.getElementById("dinner").textContent =
+            todayRecord ? todayRecord.dinner : "0";
+          document.getElementById("messStatus").textContent =
+            todayRecord ? todayRecord.messStatus : "Open";
+
+          showRows("summaryBody", (data.summary || []).map(r => [
+            r.date, r.day, r.holiday || "—", r.consecutive,
+            r.messStatus, r.breakfast, r.lunch, r.dinner
+          ]), 8, "No meal summary records.");
+
+          showRows("foodBody", (data.foods || []).map(r => [
+            displayTime(r.timestamp), r.food, r.quantity, r.waste, r.source
+          ]), 5, "No food records yet.");
+
+          showRows("attendanceBody", (data.attendance || []).map(r => [
+            displayTime(r.timestamp), r.student, r.uid, r.date, r.meal, r.status
+          ]), 6, "No RFID attendance records yet.");
+
+          document.getElementById("lastUpdated").textContent =
+            " · " + new Date().toLocaleTimeString();
+          document.getElementById("pageMessage").textContent = "";
+        })
+        .withFailureHandler(error => {
+          loading = false;
+          document.getElementById("pageMessage").textContent =
+            "Error loading dashboard: " +
+            (error && error.message ? error.message : "Please try again.");
+        })
+        .getDashboardData();
+    }
+
+    document.getElementById("foodForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const food = document.getElementById("foodName").value.trim();
+      const quantity = Number(document.getElementById("quantity").value);
+      const waste = Number(document.getElementById("waste").value);
+      const message = document.getElementById("formMessage");
+      const button = document.getElementById("saveButton");
+
+      if (!food || quantity < 0 || waste < 0 || waste > quantity) {
+        message.className = "message error";
+        message.textContent = "Check the food name and quantities. Waste cannot exceed prepared quantity.";
+        return;
+      }
+
+      button.disabled = true;
+      message.className = "message";
+      message.textContent = "Saving record…";
+
+      google.script.run
+        .withSuccessHandler(result => {
+          button.disabled = false;
+          message.className = "message";
+          message.textContent = result && result.message
+            ? result.message : "Food record saved.";
+
+          document.getElementById("foodForm").reset();
+          refreshData();
+        })
+        .withFailureHandler(error => {
+          button.disabled = false;
+          message.className = "message error";
+          message.textContent = "Save failed: " +
+            (error && error.message ? error.message : "Please try again.");
+        })
+        .saveFoodRecord({food: food, quantity: quantity, waste: waste});
+    });
+
+    refreshData();
+    setInterval(() => refreshData(false), 10000);
+  </script>
+</body>
+</html>
