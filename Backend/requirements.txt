@@ -6,3 +6,4 @@ pandas
 numpy
 pydantic
 pydantic-settings
+sqlalchemy
